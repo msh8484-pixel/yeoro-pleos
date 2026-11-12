@@ -1,0 +1,13 @@
+.superpowers/
+.gradle/
+build/
+local.properties
+.idea/
+*.iml
+.DS_Store
+.kotlin/
+*.jks
+keystore.properties
+.env*
+supabase/.temp/
+supabase/.branches/

@@ -1,0 +1,17 @@
+# Supabase 무료 플랜은 7일 동안 쓰지 않으면 프로젝트를 멈춘다(2026-11-11 실제로 멈춰 있었음).
+# 사흘마다 없는 토큰으로 upload info를 물어 DB 조회를 한 번 일으킨다. 키가 필요 없고 서버에 아무것도 남지 않는다(404).
+name: supabase keepalive
+on:
+  schedule:
+    - cron: "17 3 */3 * *"
+  workflow_dispatch:
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ping upload info
+        run: |
+          t=$(head -c 16 /dev/urandom | base64 | tr '+/' '-_' | tr -d '=')
+          code=$(curl -s -o /dev/null -w '%{http_code}' -m 60 "https://dghpdvpkgvamsaidndqa.supabase.co/functions/v1/upload?t=$t&info=1")
+          echo "status=$code"
+          [ "$code" = 404 ]

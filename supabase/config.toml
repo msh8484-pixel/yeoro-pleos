@@ -1,0 +1,21 @@
+# 여로 Supabase 프로젝트 (원격 전용, 로컬 스택은 쓰지 않는다)
+project_id = "dghpdvpkgvamsaidndqa"
+
+# 모든 함수는 게이트웨이 JWT 검사를 끈다.
+# - 업로드 페이지(휴대폰)는 키 없이 부른다.
+# - 차가 쓰는 publishable 키(sb_publishable_…)는 JWT가 아니다.
+# 대신 차가 부르는 함수는 _shared/http.ts 의 requireApiKey()로 apikey 헤더를 직접 확인한다.
+[functions.trip]
+verify_jwt = false
+
+[functions.upload]
+verify_jwt = false
+
+[functions.photos]
+verify_jwt = false
+
+[functions.outside]
+verify_jwt = false
+
+[functions.diary]
+verify_jwt = false
